@@ -1,13 +1,9 @@
-namespace WinFormsApp2
+namespace Tictactoe
 {
     public partial class Form1 : Form
     {
-        Double resultValue = 0;
-        String opPerformed = "";
-        bool isOpPerformed = false;
-
-
-
+        String player = "O";
+        short movement = 0;
 
         public Form1()
         {
@@ -17,60 +13,54 @@ namespace WinFormsApp2
         private void button1_Click(object sender, EventArgs e)
         {
 
-            if (result.Text == "0" || isOpPerformed)
-                result.Clear();
+            Button bt = (Button)sender;
+            bt.BackColor = Color.LightPink;
+            bt.Enabled = false;
+            if (player == "O")
+            {
+                bt.Text = "O";
+                if ((b1.Text == b2.Text && b2.Text == b3.Text && b2.Text != "") ||
+                   (b4.Text == b5.Text && b5.Text == b6.Text && b5.Text != "") ||
+                    (b7.Text == b8.Text && b8.Text == b9.Text && b8.Text != "") ||
+                    (b1.Text == b4.Text && b4.Text == b7.Text && b4.Text != "") ||
+                    (b2.Text == b5.Text && b5.Text == b8.Text && b5.Text != "") ||
+                    (b3.Text == b6.Text && b6.Text == b9.Text && b6.Text != "") ||
+                    (b1.Text == b5.Text && b5.Text == b9.Text && b5.Text != "") ||
+                    (b3.Text == b5.Text && b5.Text == b7.Text && b5.Text != ""))
 
-            isOpPerformed = false;
-            Button button1  = (Button)sender;
-            result.Text = result.Text + button1.Text;
-        }
+                {
+                    MessageBox.Show(($"The winner is {player.ToUpper()}"));
+                }
+                else if (movement == 8)
+                {
+                    MessageBox.Show("Draw");
+                }
+                player = "X";
 
-        private void operator_Click(object sender, EventArgs e)
-        {
-            Button button1 = (Button)sender;
-            opPerformed = button1.Text;
-            resultValue = Double.Parse(result.Text);
-            isOpPerformed = true;
-
-        }
-
-        private void button15_Click(object sender, EventArgs e)
-        {
-            result.Text = "0";
-            resultValue = 0;
-
-        }
-
-        private void button11_Click(object sender, EventArgs e)
-        {
-            switch (opPerformed)
+            }
+            else if (player == "X")
             {
 
-                case "+" :
-                    result.Text = (resultValue + Double.Parse(result.Text)).ToString();
-                    break;
+                bt.Text = "X";
+                if ((b1.Text == b2.Text && b2.Text == b3.Text && b2.Text != "") ||
+                  (b4.Text == b5.Text && b5.Text == b6.Text && b5.Text != "") ||
+                   (b7.Text == b8.Text && b8.Text == b9.Text && b8.Text != "") ||
+                   (b1.Text == b4.Text && b4.Text == b7.Text && b4.Text != "") ||
+                   (b2.Text == b5.Text && b5.Text == b8.Text && b5.Text != "") ||
+                   (b3.Text == b6.Text && b6.Text == b9.Text && b5.Text != "") ||
+                   (b1.Text == b5.Text && b5.Text == b9.Text && b5.Text != "") ||
+                   (b3.Text == b5.Text && b5.Text == b7.Text && b5.Text != ""))
+                {
+                    MessageBox.Show(($"The winner is {player.ToUpper()}"));
+                }
+                else if (movement == 8)
+                {
+                    MessageBox.Show("Draw");
+                }
+                player = "O";
+            }
+            movement++;
 
-                case "-" :
-                    result.Text = (resultValue - Double.Parse(result.Text)).ToString();
-                    break;
-
-                case "*":
-                    result.Text = (resultValue * Double.Parse(result.Text)).ToString();
-                    break;
-
-                case "/":
-                    result.Text = (resultValue / Double.Parse(result.Text)).ToString();
-                    break;
-
-                
-
-
-            }       //switch
         }
-
-        /*private void button1_click(object sender, EventArgs e)
-        {
-
-        }*/
     }
 }

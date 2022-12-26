@@ -1,4 +1,4 @@
-namespace WinFormsApp2
+namespace Tictactoe
 {
     internal static class Program
     {
